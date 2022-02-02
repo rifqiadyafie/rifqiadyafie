@@ -407,10 +407,19 @@ img {
 
 /*==================== ABOUT ====================*/
 .about__img {
-    width: 200px;
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+    /* width: 200px; */
     border-radius: .5rem;
     justify-self: center;
     align-self: center;
+    transition: all 1s ease;
+}
+
+.about__img:hover {
+    transform: scale(1.3);
+    border-radius: 2px;
 }
 
 .about__description {
@@ -443,6 +452,14 @@ img {
 .about__buttons {
     display: flex;
     justify-content: center;
+}
+
+.about__image {
+    overflow: hidden;
+    max-width: max-content;
+    height: auto;
+    justify-self: center;
+    border-radius: 6px;
 }
 
 /*==================== SKILLS ====================*/
