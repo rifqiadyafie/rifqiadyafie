@@ -769,7 +769,7 @@
                         </div>
 
                         <div>
-                            <button type="submit" class="button btn-send button--flex" style="border-color: transparent;">
+                            <button type="submit" class="button btn-send button--flex" id="btn_send" style="border-color: transparent;">
                                 Kirim pesan
                                 <i class="uil uil-message button__icon"></i>
                             </button>
@@ -839,7 +839,7 @@
 
         <script>
             const form = document.getElementById("contact-form");
-            const button = form.querySelector("btn-send");
+            const button = document.getElementById("btn_send");
             const statusText = document.getElementById("form-status");
         
             form.addEventListener("submit", async (event) => {
