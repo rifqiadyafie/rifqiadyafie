@@ -735,7 +735,7 @@
                         </div>
                     </div>
 
-                    <form class="contact__form grid" name="portfolio-contact-form">
+                    <form class="contact__form grid" name="portfolio-contact-form" id="contact-form">
                         <!-- Ganti dengan Access Key Web3Forms kamu -->
                         <input
                             type="hidden"
@@ -838,7 +838,7 @@
         <script src="assets/js/main.js"></script>
 
         <script>
-            const form = document.getElementByClassName("contact__form");
+            const form = document.getElementById("contact-form");
             const button = document.getElementByClassName("btn-send");
             const statusText = document.getElementById("form-status");
         
