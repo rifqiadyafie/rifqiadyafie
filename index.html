@@ -777,7 +777,6 @@
                         </div>
                         <div>
                         </div>
-                        <p id="form-status" role="status" aria-live="polite"></p>
                     </form>
                 </div>
             </section>
@@ -826,29 +825,30 @@
             <i class="uil uil-arrow-up scrollup__icon"></i>
         </a>
 
+        
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
         <!--==================== SWIPER JS ====================-->
         <script src="assets/js/swiper-bundle.min.js"></script>
-        <!-- <script src="assets/js/swiper-bundle.min.js.map"></script> -->
-        <!-- <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script> -->
 
         <!--==================== MAIN JS ====================-->
         <script src="assets/js/main.js"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        
         
         <script>
             document.addEventListener("DOMContentLoaded", () => {
               const form = document.getElementById("contact-form");
               const button = document.getElementById("btn_send");
               const loadingButton = form.querySelector(".btn-load");
-              const statusText = document.getElementById("form-status");
             
-              if (!form || !button || !statusText) {
-                console.error("Elemen form kontak tidak ditemukan.");
-                return;
-              }
+              // Konfigurasi toast
+              toastr.options = {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-right",
+                timeOut: 4000,
+                preventDuplicates: true
+              };
             
               form.addEventListener("submit", async (event) => {
                 event.preventDefault();
@@ -857,11 +857,7 @@
             
                 button.disabled = true;
                 button.classList.add("hide");
-            
-                if (loadingButton) loadingButton.classList.remove("hide");
-            
-                statusText.textContent = "Sedang mengirim pesan...";
-                statusText.style.color = "";
+                loadingButton.classList.remove("hide");
             
                 try {
                   const response = await fetch(
@@ -883,24 +879,25 @@
                     );
                   }
             
-                  statusText.textContent =
-                    "Pesan berhasil dikirim. Terima kasih!";
-                  statusText.style.color = "green";
+                  toastr.success(
+                    "Pesan berhasil dikirim. Terima kasih!",
+                    "Berhasil"
+                  );
             
                   form.reset();
             
                 } catch (error) {
                   console.error("Web3Forms error:", error);
             
-                  statusText.textContent =
-                    "Gagal mengirim pesan: " + error.message;
-                  statusText.style.color = "red";
+                  toastr.error(
+                    "Pesan gagal dikirim. Silakan coba lagi.",
+                    "Gagal"
+                  );
             
                 } finally {
                   button.disabled = false;
                   button.classList.remove("hide");
-            
-                  if (loadingButton) loadingButton.classList.add("hide");
+                  loadingButton.classList.add("hide");
                 }
               });
             });
