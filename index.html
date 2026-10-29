@@ -839,7 +839,7 @@
 
         <script>
             const form = document.getElementById("contact-form");
-            const button = document.getElementByClassName("btn-send");
+            const button = form.querySelector("btn-send");
             const statusText = document.getElementById("form-status");
         
             form.addEventListener("submit", async (event) => {
